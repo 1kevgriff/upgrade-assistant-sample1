@@ -13,7 +13,7 @@ using WebApplication6.Models;
 namespace WebApplication6.Controllers
 {
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController : Microsoft.AspNetCore.Mvc.Controller
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
@@ -55,7 +55,7 @@ namespace WebApplication6.Controllers
         //
         // GET: /Account/Login
         [AllowAnonymous]
-        public ActionResult Login(string returnUrl)
+        public Microsoft.AspNetCore.Mvc.ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
             return View();
@@ -66,7 +66,7 @@ namespace WebApplication6.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+        public async Task<Microsoft.AspNetCore.Mvc.ActionResult> Login(LoginViewModel model, string returnUrl)
         {
             if (!ModelState.IsValid)
             {
@@ -94,7 +94,7 @@ namespace WebApplication6.Controllers
         //
         // GET: /Account/VerifyCode
         [AllowAnonymous]
-        public async Task<ActionResult> VerifyCode(string provider, string returnUrl, bool rememberMe)
+        public async Task<Microsoft.AspNetCore.Mvc.ActionResult> VerifyCode(string provider, string returnUrl, bool rememberMe)
         {
             // Require that the user has already logged in via username/password or external login
             if (!await SignInManager.HasBeenVerifiedAsync())
@@ -109,7 +109,7 @@ namespace WebApplication6.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> VerifyCode(VerifyCodeViewModel model)
+        public async Task<Microsoft.AspNetCore.Mvc.ActionResult> VerifyCode(VerifyCodeViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -137,7 +137,7 @@ namespace WebApplication6.Controllers
         //
         // GET: /Account/Register
         [AllowAnonymous]
-        public ActionResult Register()
+        public Microsoft.AspNetCore.Mvc.ActionResult Register()
         {
             return View();
         }
@@ -147,7 +147,7 @@ namespace WebApplication6.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<Microsoft.AspNetCore.Mvc.ActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -175,7 +175,7 @@ namespace WebApplication6.Controllers
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
-        public async Task<ActionResult> ConfirmEmail(string userId, string code)
+        public async Task<Microsoft.AspNetCore.Mvc.ActionResult> ConfirmEmail(string userId, string code)
         {
             if (userId == null || code == null)
             {
@@ -188,7 +188,7 @@ namespace WebApplication6.Controllers
         //
         // GET: /Account/ForgotPassword
         [AllowAnonymous]
-        public ActionResult ForgotPassword()
+        public Microsoft.AspNetCore.Mvc.ActionResult ForgotPassword()
         {
             return View();
         }
@@ -198,7 +198,7 @@ namespace WebApplication6.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ForgotPassword(ForgotPasswordViewModel model)
+        public async Task<Microsoft.AspNetCore.Mvc.ActionResult> ForgotPassword(ForgotPasswordViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -224,7 +224,7 @@ namespace WebApplication6.Controllers
         //
         // GET: /Account/ForgotPasswordConfirmation
         [AllowAnonymous]
-        public ActionResult ForgotPasswordConfirmation()
+        public Microsoft.AspNetCore.Mvc.ActionResult ForgotPasswordConfirmation()
         {
             return View();
         }
@@ -232,7 +232,7 @@ namespace WebApplication6.Controllers
         //
         // GET: /Account/ResetPassword
         [AllowAnonymous]
-        public ActionResult ResetPassword(string code)
+        public Microsoft.AspNetCore.Mvc.ActionResult ResetPassword(string code)
         {
             return code == null ? View("Error") : View();
         }
@@ -242,7 +242,7 @@ namespace WebApplication6.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model)
+        public async Task<Microsoft.AspNetCore.Mvc.ActionResult> ResetPassword(ResetPasswordViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -266,7 +266,7 @@ namespace WebApplication6.Controllers
         //
         // GET: /Account/ResetPasswordConfirmation
         [AllowAnonymous]
-        public ActionResult ResetPasswordConfirmation()
+        public Microsoft.AspNetCore.Mvc.ActionResult ResetPasswordConfirmation()
         {
             return View();
         }
@@ -276,7 +276,7 @@ namespace WebApplication6.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult ExternalLogin(string provider, string returnUrl)
+        public Microsoft.AspNetCore.Mvc.ActionResult ExternalLogin(string provider, string returnUrl)
         {
             // Request a redirect to the external login provider
             return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
@@ -285,7 +285,7 @@ namespace WebApplication6.Controllers
         //
         // GET: /Account/SendCode
         [AllowAnonymous]
-        public async Task<ActionResult> SendCode(string returnUrl, bool rememberMe)
+        public async Task<Microsoft.AspNetCore.Mvc.ActionResult> SendCode(string returnUrl, bool rememberMe)
         {
             var userId = await SignInManager.GetVerifiedUserIdAsync();
             if (userId == null)
@@ -302,7 +302,7 @@ namespace WebApplication6.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> SendCode(SendCodeViewModel model)
+        public async Task<Microsoft.AspNetCore.Mvc.ActionResult> SendCode(SendCodeViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -320,7 +320,7 @@ namespace WebApplication6.Controllers
         //
         // GET: /Account/ExternalLoginCallback
         [AllowAnonymous]
-        public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
+        public async Task<Microsoft.AspNetCore.Mvc.ActionResult> ExternalLoginCallback(string returnUrl)
         {
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
             if (loginInfo == null)
@@ -352,7 +352,7 @@ namespace WebApplication6.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnUrl)
+        public async Task<Microsoft.AspNetCore.Mvc.ActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnUrl)
         {
             if (User.Identity.IsAuthenticated)
             {
@@ -389,7 +389,7 @@ namespace WebApplication6.Controllers
         // POST: /Account/LogOff
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult LogOff()
+        public Microsoft.AspNetCore.Mvc.ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return RedirectToAction("Index", "Home");
@@ -398,7 +398,7 @@ namespace WebApplication6.Controllers
         //
         // GET: /Account/ExternalLoginFailure
         [AllowAnonymous]
-        public ActionResult ExternalLoginFailure()
+        public Microsoft.AspNetCore.Mvc.ActionResult ExternalLoginFailure()
         {
             return View();
         }
@@ -443,7 +443,7 @@ namespace WebApplication6.Controllers
             }
         }
 
-        private ActionResult RedirectToLocal(string returnUrl)
+        private Microsoft.AspNetCore.Mvc.ActionResult RedirectToLocal(string returnUrl)
         {
             if (Url.IsLocalUrl(returnUrl))
             {
@@ -452,7 +452,7 @@ namespace WebApplication6.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        internal class ChallengeResult : HttpUnauthorizedResult
+        internal class ChallengeResult : Microsoft.AspNetCore.Mvc.UnauthorizedResult
         {
             public ChallengeResult(string provider, string redirectUri)
                 : this(provider, redirectUri, null)
